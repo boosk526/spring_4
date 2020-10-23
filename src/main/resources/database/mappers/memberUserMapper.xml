@@ -3,7 +3,7 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-    <mapper namespace="com.choa.s4.member.memberUser.memberUserDAO">
+    <mapper namespace="com.choa.s4.member.memberUser.MemberUserDAO">
     	
     	<select id="getMemberLogin" parameterType="MemberDTO" resultType="MemberUserDTO">
     		select*from member_b where id=#{id} and pw=#{pw}

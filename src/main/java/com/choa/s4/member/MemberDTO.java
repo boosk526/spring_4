@@ -1,14 +1,12 @@
 package com.choa.s4.member;
 
 public class MemberDTO {
+	private long num;
+	private String id;
+	private String pw;
+	private String name;
+	private String email;
 	
-	 private long num;
-	 private String id;
-	 private String pw;
-	 private String name;
-	 private String email;
-	 
-	 
 	public long getNum() {
 		return num;
 	}
@@ -39,7 +37,6 @@ public class MemberDTO {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	 
-	 
-
+	
+	
 }

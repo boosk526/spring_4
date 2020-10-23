@@ -9,11 +9,11 @@ import com.choa.s4.member.MemberDTO;
 
 @Repository
 public class MemberUserDAO implements MemberDAO {
-
+	
 	@Autowired
 	private SqlSession sqlSession;
 	private final String NAMESPACE="com.choa.s4.member.memberUser.MemberUserDAO.";
-	
+
 	@Override
 	public MemberDTO getMemberLogin(MemberDTO memberDTO) throws Exception {
 		// TODO Auto-generated method stub
