@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.choa.s4.board.BoardDTO;
 import com.choa.s4.member.MemberDTO;
 
 @Controller
@@ -17,6 +18,71 @@ public class MemberUserController {
 	@Autowired
 	private MemberUserService memberUserService;
 
+	@PostMapping("memberJoin")
+	public ModelAndView setMemberJoin(MemberDTO memberDTO)throws Exception {
+		ModelAndView mv = new ModelAndView();
+		int result = memberUserService.setMemberJoin(memberDTO);
+		
+		mv.setViewName("redirect:../");
+		return mv;
+	}
+	
+	@GetMapping("memberJoin")
+	public ModelAndView setMemberJoin()throws Exception{
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("member/memberJoin");
+		return mv;
+		
+	}
+	
+	
+	@GetMapping("memberDelete")
+	public ModelAndView setMemberDelete(HttpSession session)throws Exception{
+		ModelAndView mv = new ModelAndView();
+		MemberDTO memberDTO =(MemberDTO)session.getAttribute("member");
+		int result = memberUserService.setMemberDelete(memberDTO);
+		session.invalidate();
+		
+		mv.setViewName("redirect:../");
+		
+		return mv;
+	}
+	
+	
+	
+	@PostMapping("memberUpdate")
+	public ModelAndView setMemberUpdate(MemberDTO memberDTO, HttpSession session)throws Exception{
+		ModelAndView mv = new ModelAndView();
+		MemberDTO s =(MemberDTO)session.getAttribute("member");
+		memberDTO.setId(s.getId());
+		int result = memberUserService.setMemberUpdate(memberDTO);
+		if(result>0) {
+			s.setName(memberDTO.getName());
+			s.setEmail(memberDTO.getEmail());
+			session.setAttribute("member", s);
+		}
+		mv.setViewName("redirect:./memberPage");
+		
+		return mv;
+	}
+	
+	@GetMapping("memberUpdate")
+	public ModelAndView setMemberUpdate()throws Exception {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("member/memberUpdate");
+		return mv;
+	}
+	
+	
+	@GetMapping("memberPage")
+	public ModelAndView getMemberPage()throws Exception {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("member/memberPage");
+		
+		return mv;
+	}
+
+	
 	@GetMapping("memberLogout")
 	public ModelAndView getMemberLogout(HttpSession session)throws Exception{
 		//웹브라우저 종료

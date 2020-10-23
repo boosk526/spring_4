@@ -12,9 +12,9 @@
 <c:import url="../template/header.jsp"></c:import>
 
 <div class="container">
-	<h3>Member Login Page</h3>
+	<h3>Member Join Page</h3>
 	
-	 <form action="./memberLogin" method="post">
+	 <form action="./memberJoin" method="post">
     <div class="form-group">
       <label for="id">Id:</label>
       <input type="text" class="form-control" id="id" placeholder="Enter id" name="id">
@@ -23,12 +23,23 @@
       <label for="pw">Password:</label>
       <input type="password" class="form-control" id="pw" placeholder="Enter password" name="pw">
     </div>
-    <div class="checkbox">
-      <label><input type="checkbox" name="remember"> Remember me</label>
+    <div class="form-group">
+      <label for="pw">Password:</label>
+      <input type="password" class="form-control" id="pw" placeholder="Enter password" name="pw">
     </div>
-    <button type="submit" class="btn btn-default">Login</button>
+    <div class="form-group">
+      <label for="name">Name:</label>
+      <input type="text" class="form-control" id="name" placeholder="Enter name" name="name">
+    </div>
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input type="text" class="form-control" id="email" placeholder="Enter email" name="email">
+    </div>
+    <button type="submit" class="btn btn-default">Join</button>
   </form>
-  
 </div>
+
+
+
 </body>
 </html>

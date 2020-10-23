@@ -15,6 +15,24 @@ public class MemberUserDAO implements MemberDAO {
 	private final String NAMESPACE="com.choa.s4.member.memberUser.MemberUserDAO.";
 
 	@Override
+	public int setMemberJoin(MemberDTO memberDTO) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.insert(NAMESPACE+"setMemberJoin", memberDTO);
+	}
+	
+	@Override
+	public int setMemberDelete(MemberDTO memberDTO) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.delete(NAMESPACE+"setMemberDelete", memberDTO);
+	}
+	
+	@Override
+	public int setMemberUpdate(MemberDTO memberDTO) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.update(NAMESPACE+"setMemberUpdate", memberDTO);
+	}
+	
+	@Override
 	public MemberDTO getMemberLogin(MemberDTO memberDTO) throws Exception {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne(NAMESPACE+"getMemberLogin", memberDTO);

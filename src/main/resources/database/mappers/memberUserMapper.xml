@@ -6,7 +6,20 @@
     <mapper namespace="com.choa.s4.member.memberUser.MemberUserDAO">
     	
     	<select id="getMemberLogin" parameterType="MemberDTO" resultType="MemberUserDTO">
-    		select*from member_b where id=#{id} and pw=#{pw}
+    		select num, id from member_b where id=#{id} and pw=#{pw}
     	</select>
+    	
+    	<update id="setMemberUpdate" parameterType="MemberDTO">
+    		update member_b set name=#{name}, email=#{email}
+    		where id=#{id}
+    	</update>
+    	
+    	<delete id="setMemberDelete" parameterType="MemberDTO">
+    		delete member_b where id=#{id}
+    	</delete>
+    	
+    	<insert id="setMemberJoin" parameterType="MemberDTO">
+    		insert into member_b values(member_b_seq.nextval, #{id}, #{pw}, #{name}, #{email})
+    	</insert>
     
     </mapper>
