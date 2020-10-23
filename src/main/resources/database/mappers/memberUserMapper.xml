@@ -5,8 +5,8 @@
 
     <mapper namespace="com.choa.s4.member.memberUser.memberUserDAO">
     	
-    	<select id="getMemberLogin">
-    		select*from member_b
+    	<select id="getMemberLogin" parameterType="MemberDTO" resultType="MemberUserDTO">
+    		select*from member_b where id=#{id} and pw=#{pw}
     	</select>
     
     </mapper>
