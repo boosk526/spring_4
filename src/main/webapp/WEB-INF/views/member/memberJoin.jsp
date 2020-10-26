@@ -19,6 +19,7 @@
       <label for="id">Id:</label>
       <input type="text" class="form-control" id="id" placeholder="Enter id" name="id">
     </div>
+    <div id="idResult"></div>
     <div class="form-group">
       <label for="pw">Password:</label>
       <input type="password" class="form-control" id="pw" placeholder="Enter password" name="pw">
@@ -39,6 +40,15 @@
   </form>
 </div>
 
+
+
+<script type="text/javascript">
+	$("#id").blur(function() {
+		var id = $('')
+	});
+
+
+</script>
 
 
 </body>
