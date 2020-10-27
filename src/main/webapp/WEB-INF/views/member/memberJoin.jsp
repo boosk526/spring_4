@@ -102,7 +102,7 @@
   
 	
 	
-	$("#id").blur(function() {
+/* 	$("#id").blur(function() {
 		idCheck=false;
 		var id=$(this).val();
 		$.ajax({
@@ -119,6 +119,31 @@
 					idCheck = true;
 				}
 				$("#idResult").html(str);
+			},
+			error : function(){
+				alert("Fail Error");
+			}
+
+		});
+	});  */
+	
+	$("#id").blur(function() {
+		idCheck=false;
+		var id=$(this).val();
+		$.ajax({
+			url : "./memberIdCheck",
+			type: 'get',
+			data : {id:id},
+			success: function(data) {
+				data=data.trim();
+				if(id==''){
+					$("#idResult").html("아이디 입력").css('color','orange');
+				}else if(data==0){
+					$("#idResult").html("사용가능 아이디").css('color','blue');
+					idCheck = true;
+				}else{
+					$("#idResult").html("사용중인 아이디").css('color','red');
+				}
 			},
 			error : function(){
 				alert("Fail Error");
