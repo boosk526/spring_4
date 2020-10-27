@@ -30,22 +30,46 @@
 		</div>
 		
 		
-		<div id="result"></div>
-		<button class="btn btn-danger del">더보기</button>
+		<div>
+		<table  id="result" class="table table-border">
+			
+		</table>
+		</div>
+		<button id="more" class="btn btn-danger">더보기</button>
 		
 	</div>
 	
 	
+	
+	
 <script type="text/javascript">
+
+	var curPage=1;
 	getList();
 	
 	//***************  DEL **************
 	
-	
 	$("#result").on("click", ".del", function() {
 		var num = $(this).attr("title");
 		
-		$.post("./memoDelete",{num:num}, function(data) {
+		$.ajax({
+			url : "./memoDelete",
+			type : 'post',
+			data : {num:num},
+			success: function(data) {
+				data=data.trim();
+				if(data>0){
+					$("#result").html('');
+					curPage=1;
+					getList();
+				}else {
+					alert("Delete Fail");
+				}
+			}
+		});
+		
+		
+		/* $.post("./memoDelete",{num:num}, function(data) {
 			data=data.trim();
 			if(data>0){
 				getList();
@@ -53,35 +77,65 @@
 				alert("Delete Fail");
 			}
 		});
-		
+		 */
 	});
 	
 	
-	//**********************************
-	
+	//*************** Write *******************
 	
 	$("#write").click(function() {
 		var writer = $("#writer").val();
 		var contents = $("#contents").val();
-		$.post("./memoWrite",{writer:writer, contents:contents},function(result) {
+		
+		$.ajax({
+			url : "./memoWrite",
+			type : 'post',
+			data :{writer:writer, 
+				   contents:contents},
+			success : function(result) {
+				alert(result);
+				$("#writer").val('');
+				$("#contents").val('');
+				$("#result").html('');
+				curPage=1;
+				getList();
+			}	
+		});
+	});
+	
+	
+		/* $.post("./memoWrite",{writer:writer, contents:contents},function(result) {
 			alert(result);
 			$("#writer").val('');
 			$("#contents").val('');
 			getList();
-		});
-	});
+		}); */
 	
-	//**********************************
+	//**************** List ******************
 	
 	
 	function getList() {
-		$.get("./memoList", function(data) {
-			$("#result").html(data);
+		$.ajax({
+			url :"./memoList",
+			type : 'get',
+			data : {curPage:curPage},
+			success: function(data) {
+				$("#result").append(data);
+			}
 		});
+		
+		/* $.get("./memoList", function(data) {
+			$("#result").html(data);
+		}); */
 		
 	}
 	
+	//**************** more ******************
 	
+		$("#more").click(function() {
+			curPage++;
+			getList();
+		});
 	
 	
 	

@@ -76,7 +76,7 @@
  
 	//*******************id check********************
  		
-	 	$("#id").blur(function() {
+	/*  	$("#id").blur(function() {
 			idCheck=false;
 			var id=$(this).val();
 			if(id !=''){
@@ -98,8 +98,35 @@
 			$("#idResult").html("아이디 필수 항목");
 			$("#idResult").removeClass("idCheck0").addClass("idCheck1");
 		} 
-		}); 
+		});  */
   
+	
+	
+	$("#id").blur(function() {
+		idCheck=false;
+		var id=$(this).val();
+		$.ajax({
+			url : "./memberIdCheck",
+			type: 'get',
+			data : {id:id},
+			success: function(data) {
+				data=data.trim();
+				var str = "중복된 아이디";
+					$("#idResult").removeClass("idCheck0").addClass("idCheck1");
+				if(data==0){
+					str="사용 가능한 아이디";
+					$("#idResult").removeClass("idCheck1").addClass("idCheck0");
+					idCheck = true;
+				}
+				$("#idResult").html(str);
+			},
+			error : function(){
+				alert("Fail Error");
+			}
+
+		});
+	}); 
+	
 	
  	//***************pw check***************
  	
@@ -140,31 +167,6 @@
 			});
 		}
  	
- 	
- 	
- 	
- 	/*  $("#id").blur(function() {
-		var id=$('#id').val();
-		$.ajax({
-			url : "./memberIdCheck?id="+id,
-			type: 'get',
-			success: function(result) {
-				console.log("result"+result);
-				result=result.trim();
-				if(result==1){
-					$("#idResult").text("사용중인 아이디입니다").css("color","red");
-				}else if(result==0){
-					$("#idResult").text("사용가능한 아이디 입니다").css("color","blue");
-				}else{
-					$("#idResult").text("아이디를 입력해주세요").css("color","gray");
-				}
-			},
-			error : function(){
-				alert("Fail Error");
-			}
-
-		});
-	}); */
 
 </script>
 

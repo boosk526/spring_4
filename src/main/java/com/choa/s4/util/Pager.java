@@ -35,7 +35,7 @@ public class Pager {
 		
 
 		//startRow
-		startRow = (this.getCurPage()-1)*this.getPerPage();
+		startRow = (this.getCurPage()-1)*this.getPerPage()+1;
 		//lastRow
 		lastRow = this.getCurPage()*this.getPerPage();
 		//********************************
