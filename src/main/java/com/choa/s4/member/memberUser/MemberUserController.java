@@ -7,16 +7,37 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.choa.s4.board.BoardDTO;
 import com.choa.s4.member.MemberDTO;
 
 @Controller
-@RequestMapping("/member/**")
+@RequestMapping(value ="/member/**")
 public class MemberUserController {
 	@Autowired
 	private MemberUserService memberUserService;
+	
+	//idcheck
+	@GetMapping("memberIdCheck")
+	public ModelAndView getMemberIdCheck(MemberDTO memberDTO) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		memberDTO = memberUserService.getMemberIdCheck(memberDTO);
+		
+		int result=1;// 중복
+		if(memberDTO == null) {
+			result=0;
+		}
+		
+		mv.addObject("msg", result);
+		mv.setViewName("common/ajaxResult");
+		return mv;
+	}
+	
+
 
 	@PostMapping("memberJoin")
 	public ModelAndView setMemberJoin(MemberDTO memberDTO)throws Exception {

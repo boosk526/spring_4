@@ -6,6 +6,15 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+ .idCheck0{
+ 	color: blue;
+ }
+ .idCheck1{
+ 	color: red;
+ }
+
+</style>
 <c:import url="../template/bootStrap.jsp"></c:import>
 </head>
 <body>
@@ -14,7 +23,7 @@
 <div class="container">
 	<h3>Member Join Page</h3>
 	
-	 <form action="./memberJoin" method="post">
+	 <form action="./memberJoin" method="post" id="frm">
     <div class="form-group">
       <label for="id">Id:</label>
       <input type="text" class="form-control" id="id" placeholder="Enter id" name="id">
@@ -26,27 +35,136 @@
     </div>
     <div class="form-group">
       <label for="pw">Password:</label>
-      <input type="password" class="form-control" id="pw" placeholder="Enter password" name="pw2">
+      <input type="password" class="form-control" id="pw2" placeholder="Enter password" name="pw2">
     </div>
+    <div id="pwResult"></div>
     <div class="form-group">
       <label for="name">Name:</label>
-      <input type="text" class="form-control" id="name" placeholder="Enter name" name="name">
+      <input type="text" class="form-control empty" id="name" placeholder="Enter name" name="name">
+    <div class="emptyResult"></div>
     </div>
     <div class="form-group">
       <label for="email">Email:</label>
-      <input type="text" class="form-control" id="email" placeholder="Enter email" name="email">
+      <input type="text" class="form-control empty" id="email" placeholder="Enter email" name="email">
+    <div class="emptyResult"></div>
     </div>
-    <button type="submit" class="btn btn-default">Join</button>
+    <input type="button" value="Join" class="btn btn-default" id="join">
   </form>
 </div>
 
 
 
 <script type="text/javascript">
-	$("#id").blur(function() {
-		var id = $('')
-	});
+	
+		var idCheck = false;
+		var pwCheck = false;
+		var emptyCheckResult=true;
+		
+		$("#join").click(function() {
+			emptyCheck();
+			if(idCheck && pwCheck && emptyCheckResult){
+				//중복체크했고 사용가능한 id
+				$("#frm").submit();
+			}
+			/* else{
+				//중복체크를 안했거나 사용 불가능한 아이디
+				alert("No")
+			} */
+			
+			//$("#frm").submit();
+		});
+ 
+	//*******************id check********************
+ 		
+	 	$("#id").blur(function() {
+			idCheck=false;
+			var id=$(this).val();
+			if(id !=''){
+			 $.get("./memberIdCheck?id="+id, function(data) {
+				//a 사용가능, b 사용불가
+				//true 사용가능, false 사용불가
+				//0 사용가능,  1사용불가
+				data=data.trim();
+				var str = "중복된 아이디";
+					$("#idResult").removeClass("idCheck0").addClass("idCheck1");
+				if(data==0){
+					str="사용 가능한 아이디";
+					$("#idResult").removeClass("idCheck1").addClass("idCheck0");
+					idCheck = true;
+				}
+				$("#idResult").html(str);
+			});
+		}else{
+			$("#idResult").html("아이디 필수 항목");
+			$("#idResult").removeClass("idCheck0").addClass("idCheck1");
+		} 
+		}); 
+  
+	
+ 	//***************pw check***************
+ 	
+ 		$("#pw2").blur(function() {
+			var pw = $("#pw").val();
+			var pw2 = $(this).val();
+			pwCheck=false;
+			if(pw2==''){
+				$("#pwResult").text("비밀번호 입력")
+				$("#pwResult").removeClass("idCheck0").addClass("idCheck1");
+			}else if(pw == pw2){
+				//$("#pwResult").html("비밀번호 일치").css('color','blue');
+				$("#pwResult").text("비밀번호 일치")
+				$("#pwResult").removeClass("idCheck1").addClass("idCheck0");
+				pwCheck = true;
+			}else{					
+				//$("#pwResult").html("비밀번호 일치하지 않음").css('color','red');
+				$("#pwResult").text("비밀번호 일치하지 않음")
+				$("#pwResult").removeClass("idCheck0").addClass("idCheck1");
+			}
+				
+			
+		});
+ 		
+ 	
+ 	//******************empty check*********************
+ 		
+ 		function emptyCheck() {
+ 			emptyCheckResult=true;
+ 			$(".emptyResult").html('');
+			$(".empty").each(function() {
+				var data = $(this).val();
+				if(data==''){
+					emptyCheckResult=false;
+					
+					$(this).next().html("필수 항목").css('color','red');
+				}
+			});
+		}
+ 	
+ 	
+ 	
+ 	
+ 	/*  $("#id").blur(function() {
+		var id=$('#id').val();
+		$.ajax({
+			url : "./memberIdCheck?id="+id,
+			type: 'get',
+			success: function(result) {
+				console.log("result"+result);
+				result=result.trim();
+				if(result==1){
+					$("#idResult").text("사용중인 아이디입니다").css("color","red");
+				}else if(result==0){
+					$("#idResult").text("사용가능한 아이디 입니다").css("color","blue");
+				}else{
+					$("#idResult").text("아이디를 입력해주세요").css("color","gray");
+				}
+			},
+			error : function(){
+				alert("Fail Error");
+			}
 
+		});
+	}); */
 
 </script>
 

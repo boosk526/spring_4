@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.choa.s4.util.Pager;
@@ -17,7 +19,7 @@ public class MemoController {
 	
 	@Autowired
 	private MemoService memoService;
-	
+
 	@PostMapping("memoDelete")
 	public ModelAndView setDelete(MemoDTO memoDTO)throws Exception{
 		ModelAndView mv = new ModelAndView();
