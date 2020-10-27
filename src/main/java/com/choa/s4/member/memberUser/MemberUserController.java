@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.choa.s4.board.BoardDTO;
@@ -40,10 +41,13 @@ public class MemberUserController {
 
 
 	@PostMapping("memberJoin")
-	public ModelAndView setMemberJoin(MemberDTO memberDTO)throws Exception {
+	public ModelAndView setMemberJoin(MemberDTO memberDTO, MultipartFile photo)throws Exception {
 		ModelAndView mv = new ModelAndView();
-		int result = memberUserService.setMemberJoin(memberDTO);
-		
+		System.out.println(photo.getOriginalFilename());
+		System.out.println(photo.getName());
+		System.out.println(photo.getSize());
+		System.out.println(photo.getContentType());
+	//	int result = memberUserService.setMemberJoin(memberDTO);
 		mv.setViewName("redirect:../");
 		return mv;
 	}
