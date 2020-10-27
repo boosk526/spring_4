@@ -82,12 +82,6 @@
 	}
 	
 	
-	
-	
-	
-	
-	
-	
 	//var num=$("#num").val();
 	//var name=$("#name").val();
 
