@@ -12,7 +12,7 @@
 <c:import url="../template/header.jsp"></c:import>
 <div class="container">
   <h2>${board} Write Form</h2>
-  <form id="frm" action="./${board}Write" method="post">
+  <form id="frm" action="./${board}Write" method="post" enctype="multipart/form-data">
   
     <div class="form-group">
       <label for="title">Title:</label>
@@ -29,6 +29,10 @@
       <textarea class="form-control" rows="10" id="contents" name="contents"></textarea>
     </div>	
  
+ 	<div class="form-group">
+      <label for="files">File:</label>
+      <input type="file" class="form-control" id="file" name="files">
+    </div> 
  
     <input type="button" class="btn btn-primary" value="Write" id="btn">
     <button type="submit" class="btn btn-default">Write</button>
