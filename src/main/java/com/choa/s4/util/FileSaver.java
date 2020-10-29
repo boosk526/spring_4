@@ -32,7 +32,7 @@ public class FileSaver {
 	
 	
 	
-	// FileCopyUtils.copy
+	// FileCopyUtil.copy
 	public String saveCopy(File dest, MultipartFile multipartFile)throws Exception{
 		
 		if(!dest.exists()) {

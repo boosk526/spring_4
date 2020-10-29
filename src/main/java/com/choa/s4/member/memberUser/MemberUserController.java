@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.choa.s4.board.BoardDTO;
 import com.choa.s4.member.MemberDTO;
+import com.choa.s4.member.memberFile.MemberFileDTO;
 
 @Controller
 @RequestMapping(value ="/member/**")
@@ -101,12 +102,16 @@ public class MemberUserController {
 	
 	
 	@GetMapping("memberPage")
-	public ModelAndView getMemberPage()throws Exception {
+	public ModelAndView getMemberPage(HttpSession session)throws Exception {
 		ModelAndView mv = new ModelAndView();
+		MemberDTO memberDTO = (MemberDTO)session.getAttribute("member");
+		MemberFileDTO memberFileDTO = memberUserService.getOne(memberDTO);
+		mv.addObject("file", memberFileDTO);
 		mv.setViewName("member/memberPage");
 		
 		return mv;
 	}
+	
 
 	
 	@GetMapping("memberLogout")
