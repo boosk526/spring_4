@@ -9,10 +9,6 @@
     		select id from member where id=#{id}
     	</select>
     	
-    	<select id="getMemberLogin" parameterType="MemberDTO" resultType="MemberUserDTO">
-    		select num, id from member where id=#{id} and pw=#{pw}
-    	</select>
-    	
     	<update id="setMemberUpdate" parameterType="MemberDTO">
     		update member set name=#{name}, email=#{email}
     		where id=#{id}
@@ -26,4 +22,30 @@
     		insert into member values(member_seq.nextval, #{id}, #{pw}, #{name}, #{email})
     	</insert>
     
+    	<resultMap type="MemberUserDTO" id="getMemberLoginResult">
+    		<id column="num" property="num"/>
+    		<result column="id" property="id"/>
+    		<result column="pw" property="pw"/>
+    		<result column="name" property="name"/>
+    		<result column="email" property="email"/>
+    		<association property="memberFileDTO" javaType="MemberFileDTO" resultMap="memberFileResult">
+    			
+    		</association>
+    	</resultMap>
+    	
+    	<resultMap type="MemberFileDTO" id="memberFileResult">
+    		<id column="num" property="num"/>
+    		<result column="id" property="id"/>
+    		<result column="filename" property="filename"/>
+    		<result column="oriname" property="oriname"/>
+    	</resultMap>
+    	
+    	<select id="getMemberLogin" parameterType="MemberDTO" resultMap="getMemberLoginResult">
+    		select M.*,F.filename,F.oriname
+			from member M inner join memberfile F
+			on(M.id = F.id)
+			where M.id = #{id} and M.pw = #{pw}
+    	</select>
+    	
+    	
     </mapper>

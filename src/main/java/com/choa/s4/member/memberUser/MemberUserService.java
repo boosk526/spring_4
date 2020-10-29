@@ -28,9 +28,9 @@ public class MemberUserService implements MemberService {
 	private FileSaver fileSaver;
 	
 	
-	public MemberFileDTO getOne(MemberDTO memberDTO)throws Exception {
-		return memberFileDAO.getOne(memberDTO);
-	}
+//	public MemberFileDTO getOne(MemberDTO memberDTO)throws Exception {
+//		return memberFileDAO.getOne(memberDTO);
+//	}
 	
 	
 	@Override

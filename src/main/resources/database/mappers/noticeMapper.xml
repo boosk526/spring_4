@@ -13,10 +13,16 @@
 	<delete id="setDelete" parameterType="NoticeDTO">
 		delete notice where num=#{num}
 	</delete>
+		
+	<resultMap type="NoticeDTO" id="getOneResult">
+		<id column="n" property="num"/>
+		<result column="t" property="title"/>	
+		<result column="writer" property="writer"/>
+		<result column="contents" property="contents"/>
+		</resultMap>
 
-
-	<select id="getOne" parameterType="NoticeDTO" resultType="NoticeDTO">
-		select * from notice where num = #{num}
+	<select id="getOne" parameterType="NoticeDTO" resultMap="getOneResult">
+		select num as n, title as t, writer, contents from notice where num = #{num}
 	</select>
 	
 	<insert id="setInsert" parameterType="NoticeDTO">

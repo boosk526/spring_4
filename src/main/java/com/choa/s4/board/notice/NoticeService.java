@@ -21,25 +21,9 @@ public class NoticeService implements BoardService {
 	private NoticeDAO noticeDAO;
 
 	@Override
-	public int setInsert(BoardDTO boardDTO, MultipartFile photo, HttpSession session) throws Exception {
-		String path = session.getServletContext().getRealPath("/resources/upload/notice");
-		File file2 = new File(path);
-		if(!file2.exists()) {
-			file2.mkdirs();
-		}
-		System.out.println(path);
-		
-		Calendar ca = Calendar.getInstance();
-		long time = ca.getTimeInMillis();
-		String name = photo.getOriginalFilename();
-		name = time+"_"+name;
-		System.out.println(name);
-		
-		File file = new File(path, name);
-		
-		byte[] ar = photo.getBytes();
-		FileCopyUtils.copy(ar, file);
-		
+	public int setInsert(BoardDTO boardDTO) throws Exception {
+		// TODO Auto-generated method stub
+	
 		return 0;//noticeDAO.setInsert(boardDTO);
 	}
 
