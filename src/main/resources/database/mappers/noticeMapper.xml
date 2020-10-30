@@ -5,6 +5,10 @@
 
 <mapper namespace="com.choa.s4.board.notice.NoticeDAO">
 
+	<insert id="setInsertFile" parameterType="BoardFileDTO">
+		insert into noticeFile values(notice_seq.nextval,#{num}, #{fileName}, #{oriName})
+	</insert>
+	
 	<update id="setUpdate" parameterType="NoticeDTO">
 		update notice set title=#{title}, contents=#{contents} where num=#{num}
 	</update>
@@ -15,18 +19,33 @@
 	</delete>
 		
 	<resultMap type="NoticeDTO" id="getOneResult">
-		<id column="n" property="num"/>
-		<result column="t" property="title"/>	
-		<result column="writer" property="writer"/>
-		<result column="contents" property="contents"/>
-		</resultMap>
-
+		<id column="num" property="num"/>
+		<result column="title" property="title"/>
+		<result column="writer" property="writer"/>	
+		<result column="contents" property="contents"/>	
+		<result column="regDate" property="regDate"/>
+		<result column="hit" property="hit"/>
+		<collection property="boardFileDTOs" ofType="BoardFileDTO" javaType="java.util.List">
+			<id column="fileNum" property="fileNum"/>
+			<result column="fileName" property="fileName"/>
+			<result column="oriName" property="oriName"/>
+		</collection>
+	</resultMap>
 	<select id="getOne" parameterType="NoticeDTO" resultMap="getOneResult">
-		select num as n, title as t, writer, contents from notice where num = #{num}
+		select N.*, NF.filename, NF.oriname
+		from notice N left join noticeFile NF
+		on(N.num=NF.num) where N.num={#num}
+	</select>
+	
+	<select id="getNum" resultType="Long">
+		select notice_seq.nextval from dual
 	</select>
 	
 	<insert id="setInsert" parameterType="NoticeDTO">
-		insert into notice values(notice_seq.nextval, #{title}, #{writer}, #{contents}, sysdate, 0)
+		<selectKey keyProperty="num" resultType="Long" order="BEFORE">
+			select notice_seq.nextval from dual
+		</selectKey>
+		insert into notice values(#{num}, #{title}, #{writer}, #{contents}, sysdate, 0)
 	</insert>
 	
 	<select id="getList" resultType="NoticeDTO" parameterType="Pager">

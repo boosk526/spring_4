@@ -71,7 +71,7 @@ public class QnaController {
 	@PostMapping("qnaWrite")
 	public ModelAndView setInsert(BoardDTO boardDTO)throws Exception{
 		ModelAndView mv = new ModelAndView();
-		int result = qnaService.setInsert(boardDTO);
+		int result = qnaService.setInsert(boardDTO, null, null);
 		String message="Write Fail";
 		if(result>0) {
 			message ="Write Success";

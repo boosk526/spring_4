@@ -82,12 +82,12 @@
   	<a href="./${board}List?curPage=${pager.lastNum+1}&kind=${pager.kind}&search=${pager.search}">[다음]</a>
   	</c:if>
   </div>
-  
+  <a href="./${board}Write" class="btn btn-danger">Write</a>
 
 <c:choose>
 	<c:when test="${board eq 'notice'}">
   		<c:if test="${not empty member and member.id eq 'admin'}">
-  			<a href="./${board}Write" class="btn btn-danger">Write</a>
+  			
   		</c:if>
  	</c:when>
  	<c:otherwise>
