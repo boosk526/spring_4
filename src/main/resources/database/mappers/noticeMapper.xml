@@ -8,7 +8,8 @@
 	<insert id="setInsertFile" parameterType="BoardFileDTO">
 		insert into noticeFile values(notice_seq.nextval,#{num}, #{fileName}, #{oriName})
 	</insert>
-	
+
+
 	<update id="setUpdate" parameterType="NoticeDTO">
 		update notice set title=#{title}, contents=#{contents} where num=#{num}
 	</update>
@@ -17,12 +18,12 @@
 	<delete id="setDelete" parameterType="NoticeDTO">
 		delete notice where num=#{num}
 	</delete>
-		
+	
 	<resultMap type="NoticeDTO" id="getOneResult">
 		<id column="num" property="num"/>
 		<result column="title" property="title"/>
-		<result column="writer" property="writer"/>	
-		<result column="contents" property="contents"/>	
+		<result column="writer" property="writer"/>
+		<result column="contents" property="contents"/>
 		<result column="regDate" property="regDate"/>
 		<result column="hit" property="hit"/>
 		<collection property="boardFileDTOs" ofType="BoardFileDTO" javaType="java.util.List">
@@ -31,10 +32,13 @@
 			<result column="oriName" property="oriName"/>
 		</collection>
 	</resultMap>
+
+
 	<select id="getOne" parameterType="NoticeDTO" resultMap="getOneResult">
-		select N.*, NF.filename, NF.oriname
+		select N.*, NF.*
 		from notice N left join noticeFile NF
-		on(N.num=NF.num) where N.num={#num}
+		on N.num = NF.num
+		where N.num=#{num}
 	</select>
 	
 	<select id="getNum" resultType="Long">
@@ -88,4 +92,4 @@
 	
 	
 	
-</mapper>  
+</mapper>   

@@ -8,17 +8,18 @@ import com.choa.s4.member.MemberDTO;
 
 @Repository
 public class MemberFileDAO {
-
 	@Autowired
 	private SqlSession sqlSession;
-	private final String NAMESPACE="com.choa.s4.member.memberFile.MemberFileDAO.";
-	//setinsert
 	
-	public int setInsert(MemberFileDTO memberFileDTO) throws Exception{
+	private final String NAMESPACE="com.choa.s4.member.memberFile.MemberFileDAO.";
+	
+	
+	//setInsert
+	public int setInsert(MemberFileDTO memberFileDTO)throws Exception{
 		return sqlSession.insert(NAMESPACE+"setInsert", memberFileDTO);
 	}
 	
-	public MemberFileDTO getOne(MemberDTO memberDTO)throws Exception {
+	public MemberFileDTO getOne(MemberDTO memberDTO)throws Exception{
 		return sqlSession.selectOne(NAMESPACE+"getOne", memberDTO);
 	}
 	

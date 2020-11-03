@@ -6,8 +6,9 @@
   <configuration>
   	<typeAliases>
   		<typeAlias type="java.lang.Long" alias="Long"/>
+  		
   		<typeAlias type="com.choa.s4.board.BoardDTO" alias="BoardDTO"/>
-  		<typeAlias type="com.choa.s4.board.file" alias="BoardFileDTO"/>
+  		<typeAlias type="com.choa.s4.board.file.BoardFileDTO" alias="BoardFileDTO"/>
   		<typeAlias type="com.choa.s4.board.notice.NoticeDTO" alias="NoticeDTO"/>
   		<typeAlias type="com.choa.s4.board.qna.QnaDTO" alias="QnaDTO"/>
   		<typeAlias type="com.choa.s4.board.memo.MemoDTO" alias="MemoDTO"/>
@@ -15,5 +16,8 @@
   		<typeAlias type="com.choa.s4.member.memberUser.MemberUserDTO" alias="MemberUserDTO"/>
   		<typeAlias type="com.choa.s4.member.memberFile.MemberFileDTO" alias="MemberFileDTO"/>
   		<typeAlias type="com.choa.s4.util.Pager" alias="Pager"/>
+  	
   	</typeAliases>
+  
+  
   </configuration>

@@ -2,17 +2,16 @@ package com.choa.s4.board.file;
 
 public class BoardFileDTO {
 	
-	private long filenum;
+	private long fileNum;
 	private long num;
-	private String filename;
-	private String oriname;
+	private String fileName;
+	private String oriName;
 	
-	
-	public long getFilenum() {
-		return filenum;
+	public long getFileNum() {
+		return fileNum;
 	}
-	public void setFilenum(long filenum) {
-		this.filenum = filenum;
+	public void setFileNum(long fileNum) {
+		this.fileNum = fileNum;
 	}
 	public long getNum() {
 		return num;
@@ -20,18 +19,19 @@ public class BoardFileDTO {
 	public void setNum(long num) {
 		this.num = num;
 	}
-	public String getFilename() {
-		return filename;
+	public String getFileName() {
+		return fileName;
 	}
-	public void setFilename(String filename) {
-		this.filename = filename;
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
 	}
-	public String getOriname() {
-		return oriname;
+	public String getOriName() {
+		return oriName;
 	}
-	public void setOriname(String oriname) {
-		this.oriname = oriname;
+	public void setOriName(String oriName) {
+		this.oriName = oriName;
 	}
+	
+	
+
 }
-	
-	

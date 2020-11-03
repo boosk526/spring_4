@@ -1,5 +1,6 @@
 package com.choa.s4.board.notice;
 
+import java.io.File;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -13,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.choa.s4.board.BoardDTO;
+import com.choa.s4.board.BoardService;
 import com.choa.s4.util.Pager;
 
 @Controller
@@ -21,11 +23,36 @@ public class NoticeController {
 	@Autowired
 	private NoticeService noticeService;
 	
+	@PostMapping("summernoteDelete")
+	public ModelAndView summernoteDelete(String file, HttpSession session)throws Exception{
+		ModelAndView mv = new ModelAndView();
+		boolean result = noticeService.summernoteDelete(file, session);
+		mv.addObject("msg", result);
+		mv.setViewName("common/ajaxResult");
+		return mv;
+	}
+	
+	@PostMapping("summernote")
+	public ModelAndView summernote(MultipartFile file, HttpSession session)throws Exception{
+		ModelAndView mv = new ModelAndView();
+
+		String fileName = noticeService.summernote(file, session);
+		
+		
+		String name = session.getServletContext().getContextPath()+File.separator;
+		name = name+"resources"+File.separator+"upload"+File.separator;
+		name = name+"qna"+File.separator+fileName;
+		System.out.println(name);
+		mv.addObject("msg", name);
+		mv.setViewName("common/ajaxResult");
+		return mv;
+	}
+	
+	
 	@GetMapping("noticeSelect")
 	public ModelAndView getOne(BoardDTO boardDTO)throws Exception{
 		ModelAndView mv = new ModelAndView();
 		boardDTO = noticeService.getOne(boardDTO);
-		
 		if(boardDTO != null) {
 			mv.setViewName("board/boardSelect");
 			mv.addObject("dto", boardDTO);
@@ -81,6 +108,16 @@ public class NoticeController {
 		mv.addObject("pager", pager);
 		System.out.println("Notice List");
 		mv.setViewName("board/boardList"); 
+		return mv;
+	}
+	
+	@GetMapping("qnaUpdate")
+	public ModelAndView setUpdate(BoardDTO boardDTO)throws Exception{
+		ModelAndView mv = new ModelAndView();
+		boardDTO = noticeService.getOne(boardDTO);
+		mv.addObject("dto", boardDTO);
+		
+		mv.setViewName("board/boardUpdate");
 		return mv;
 	}
 

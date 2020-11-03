@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.choa.s4.MyTestCase;
 
-public class MemberFileDAOTest extends MyTestCase{
+public class MemberFileDAOTest extends MyTestCase {
 
 	@Autowired
 	private MemberFileDAO memberFileDAO;
@@ -15,11 +15,11 @@ public class MemberFileDAOTest extends MyTestCase{
 	@Test(expected = RuntimeException.class)
 	public void setInsertTest()throws Exception{
 		MemberFileDTO memberFileDTO = new MemberFileDTO();
-		memberFileDTO.setId("id1543636");
-		//memberFileDTO.setId("id1");
-		memberFileDTO.setFilename("filename");
-		memberFileDTO.setOriname("oriname");
+		memberFileDTO.setId("id41331313");
+		memberFileDTO.setFileName("fileName");
+		memberFileDTO.setFileName("Oriname");
 		int result = memberFileDAO.setInsert(memberFileDTO);
 		assertEquals(1, result);
 	}
+
 }

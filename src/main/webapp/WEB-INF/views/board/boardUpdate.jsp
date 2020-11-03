@@ -25,12 +25,12 @@
 <body>
 <c:import url="../template/header.jsp"></c:import>
 <div class="container">
-  <h2>${board} Write Form</h2>
-  <form id="frm" action="./${board}Write" method="post" enctype="multipart/form-data">
+  <h2>${board} Update Form</h2>
+  <form id="frm" action="./${board}Update" method="post" enctype="multipart/form-data">
   
     <div class="form-group">
       <label for="title">Title:</label>
-      <input type="text" class="form-control" id="title" placeholder="Enter Title" name="title">
+      <input type="text" class="form-control" value="${dto.title}" id="title" placeholder="Enter Title" name="title">
     </div>
     
     <div class="form-group">
@@ -67,76 +67,13 @@
 
 <script type="text/javascript">
 
-	var count=0;
-
+ 	var count=0;
+ 	
 	$('#contents').summernote({
-		height:300,
-	 	callbacks:{
-			 onImageUpload:function(files, editor, welEditable){
-				 var formData = new FormData();	    //가상의 from 태그 작성
-				 formData.append('file', files[0]); //파라미터 이름 file
-			 
-				 $.ajax({
-				    data: formData,
-				    type: "POST",
-				    url: 'summernote',
-				    cache: false,
-				    contentType: false,
-				    enctype: 'multipart/form-data',
-				    processData: false,
-					 success:function(data){
-						 data = data.trim();
-						 $("#contents").summernote('editor.insertImage', data);
-					 }
-				 })
-			 },//upload End
-		 
-			 onMediaDelete:function(files){
-				 var fileName = $(files[0]).attr("src");
-				 //fileName에서 파일명만 구해오기
-				 //s4/resources/upload/qna/sdfa-sdfsdf_iu1.jpg
-				fileName = fileName.substring(fileName.lastIndexOf("\\")+1);
-				
-				$.ajax({
-					type:"POST",
-					url : "./summernoteDelete",
-					data: {
-						file:fileName
-					},
-					success:function(data){
-						alert(data);
-					}
-				
-				}); 
-			 }
-		 }
-		
+		  height: 300,  
+		  focus: true
 	});
-
-	/* var markup = 'hello world';
-	$('#contents').summernote('code', markup); */
-	
-	
-	
-	
-	
-	$("#fileAdd").click(function() {
-		
-		if(count<5){
-			var f = $("#f").html().trim();
-			
-			$("#files").append(f);
-			count++;
-		}else {
-			alert("첨부파일은 최대 5개")			
-		}
-	}); 
-	
-	
-	$("#files").on("click", ".del", function(){
-		$(this).parent().remove();
-		count--;
-	}); 
+	$('#contents').summernote('code','${dto.contents}');
 	
 </script>
 

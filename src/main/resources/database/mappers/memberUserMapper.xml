@@ -36,12 +36,12 @@
     	<resultMap type="MemberFileDTO" id="memberFileResult">
     		<id column="num" property="num"/>
     		<result column="id" property="id"/>
-    		<result column="filename" property="filename"/>
-    		<result column="oriname" property="oriname"/>
+    		<result column="fileName" property="fileName"/>
+    		<result column="oriName" property="oriName"/>
     	</resultMap>
     	
     	<select id="getMemberLogin" parameterType="MemberDTO" resultMap="getMemberLoginResult">
-    		select M.*,F.filename,F.oriname
+    		select M.*,F.fileName,F.oriName
 			from member M inner join memberfile F
 			on(M.id = F.id)
 			where M.id = #{id} and M.pw = #{pw}
