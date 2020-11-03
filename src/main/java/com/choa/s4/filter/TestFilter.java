@@ -39,30 +39,30 @@ public class TestFilter implements Filter {
 
 		// pass the request along the filter chain
 		
-		// notice writer, update, delete 관리자만 가능
+		//qna 로그인한 사람만 접근 가능
 		
-		// qna 로그인한 사람만 접근 가능
 		HttpServletRequest req = (HttpServletRequest)request;
 		
 		String url = req.getRequestURL().toString();
 		String uri = req.getRequestURI();
-		
-		String result = uri.substring(uri.lastIndexOf("/")+1);
-		
+		String result =uri.substring(uri.lastIndexOf("/")+1);
 		System.out.println("URL : "+url);
 		System.out.println("URI : "+uri);
-		System.out.println("Result : "+result); // qnaList
+		System.out.println("Result : "+result);//qnaList
 		
 		HttpSession session = req.getSession();
+		
+		
+		
 		
 		Object obj = session.getAttribute("member");
 		
 		if(result.equals("qnaList") || obj != null) {
-			chain.doFilter(request, response);	
+			chain.doFilter(request, response);
 		}else {
-			((HttpServletResponse)response).sendRedirect("../member/memberLogin");
+			((HttpServletResponse)response).sendRedirect("../member/memberLogin");	
 		}
-			
+		
 	}
 
 	/**

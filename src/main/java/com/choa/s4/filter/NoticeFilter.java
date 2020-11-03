@@ -36,9 +36,9 @@ public class NoticeFilter implements Filter {
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
 	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-		// noticeList, noticeSelect 누구나 접근 가능
-		// write, update, delete, 로그인 한 사람 중에서 id가 admin만 가능
 		
+		//noticeList, noticeSelect 누구나 접근 가능
+		//write, update, delete 로그인 한 사람중에서 id가 admin만 가능
 		HttpServletRequest req = (HttpServletRequest)request;
 		
 		String list = req.getRequestURI();
@@ -51,21 +51,21 @@ public class NoticeFilter implements Filter {
 		
 		HttpSession session = req.getSession();
 		MemberDTO memberDTO = (MemberDTO)session.getAttribute("member");
-		boolean adminCheck = false;
+		boolean adminCheck=false;
 		if(memberDTO != null && memberDTO.getId().equals("admin")) {
-			adminCheck = true;
+			adminCheck=true;
 		}
 		
 		if(check || adminCheck) {
 			chain.doFilter(request, response);
+			
 		}else {
 			((HttpServletResponse)response).sendRedirect("../member/memberLogin");
 		}
+		
+		
 	}
-	
-		
-		
-	
+
 	/**
 	 * @see Filter#init(FilterConfig)
 	 */

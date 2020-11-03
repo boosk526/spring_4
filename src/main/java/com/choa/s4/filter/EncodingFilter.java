@@ -37,9 +37,8 @@ public class EncodingFilter implements Filter {
 		// place your code here
 
 		// pass the request along the filter chain
-		
 		System.out.println("Encoding Filter In");
-		System.out.println("Encode : "+ encode);
+		
 		request.setCharacterEncoding(encode);
 		response.setCharacterEncoding(encode);
 		chain.doFilter(request, response);
@@ -50,7 +49,6 @@ public class EncodingFilter implements Filter {
 	 * @see Filter#init(FilterConfig)
 	 */
 	public void init(FilterConfig fConfig) throws ServletException {
-		// TODO Auto-generated method stub
 		// init - 초기화 메서드
 		encode = fConfig.getInitParameter("encode");
 	}
