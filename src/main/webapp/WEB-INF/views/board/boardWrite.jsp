@@ -11,16 +11,17 @@
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 
-	<style type="text/css">
-		#f {
-			display: none;
-		}
-		.del {
-			color: red;
-			font-weight: bold;
-			cursor: pointer;
-		}
-	</style>
+<style type="text/css">
+	#f {
+		display: none;
+	}
+	.del {
+		color: red;
+		font-weight: bold;
+		cursor: pointer;
+	}
+</style>
+
 </head>
 <body>
 <c:import url="../template/header.jsp"></c:import>
@@ -35,19 +36,20 @@
     
     <div class="form-group">
       <label for="writer">Writer:</label>
-      <input type="text" class="form-control" value="${member.id}" id="writer" placeholder="Enter Writer" name="writer">
+      <input type="text" class="form-control"  value="${member.id}" id="writer" placeholder="Enter Writer" name="writer">
     </div> 
     
      <div class="form-group">
       <label for="contents">Contents:</label>
-      <textarea class="form-control" rows="10" id="contents" name="contents"></textarea>
+      <textarea class="form-control" rows="20" cols="30" id="contents" name="contents"></textarea>
     </div>
     
-		<input type="button" value="FileAdd" id="fileAdd" class="btn btn-info">
+	<input type="button" value="FileAdd" id="fileAdd" class="btn btn-info">
 
 	<div id="files">
 
 	</div>  
+ 
  
  	<div class="form-group">
  	<label></label>
@@ -62,20 +64,19 @@
         <span class="input-group-addon del">DEL</span>
       </div>
   </div>
+  
 </div>
-
-
 <script type="text/javascript">
-
 	var count=0;
-
-	$('#contents').summernote({
-		height:300,
-	 	callbacks:{
+	
+	
+	 $('#contents').summernote({
+		 height:300,
+		 callbacks:{
 			 onImageUpload:function(files, editor, welEditable){
 				 var formData = new FormData();	    //가상의 from 태그 작성
 				 formData.append('file', files[0]); //파라미터 이름 file
-			 
+				 
 				 $.ajax({
 				    data: formData,
 				    type: "POST",
@@ -90,7 +91,7 @@
 					 }
 				 })
 			 },//upload End
-		 
+			 
 			 onMediaDelete:function(files){
 				 var fileName = $(files[0]).attr("src");
 				 //fileName에서 파일명만 구해오기
@@ -111,14 +112,19 @@
 			 }
 		 }
 		
+	 });
+	 
+	
+	 
+	 $('#btn').click(function() {
+		var contents = $('#contents').summernote('code');
+		alert(contents);
+		
 	});
-
-	/* var markup = 'hello world';
-	$('#contents').summernote('code', markup); */
-	
-	
-	
-	
+	$("#files").on("click", ".del", function() {
+		$(this).parent().remove();
+		count--;
+	});
 	
 	$("#fileAdd").click(function() {
 		
@@ -130,15 +136,9 @@
 		}else {
 			alert("첨부파일은 최대 5개")			
 		}
-	}); 
-	
-	
-	$("#files").on("click", ".del", function(){
-		$(this).parent().remove();
-		count--;
-	}); 
-	
+	});
 </script>
+
 
 </body>
 </html>
