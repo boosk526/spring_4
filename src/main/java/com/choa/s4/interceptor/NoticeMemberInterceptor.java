@@ -25,7 +25,7 @@ public class NoticeMemberInterceptor extends HandlerInterceptorAdapter {
 		MemberDTO memberDTO = (MemberDTO)session.getAttribute("member");
 		
 		boolean check = false;
-		if(memberDTO != null && memberDTO.getId().equals("admin")) {
+		if(memberDTO != null && memberDTO.getId().equals("admin1")) {
 			check = true;
 		}else {
 		

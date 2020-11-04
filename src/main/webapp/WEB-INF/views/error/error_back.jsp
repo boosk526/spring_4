@@ -12,10 +12,9 @@
 <c:import url="../template/header.jsp"></c:import>
 
 <div class="container">
-	${msg}
-	<h1>죄송합니다.<br>
-	 요청하신 페이지를 찾을 수 없습니다.</h1>
+	<h1>서버 오류</h1>
 </div>
+
 
 </body>
 </html>
