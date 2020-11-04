@@ -1,5 +1,7 @@
 package com.choa.s4.member.memberUser;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,7 +64,6 @@ public class MemberUserController {
 		
 	}
 	
-	
 	@GetMapping("memberDelete")
 	public ModelAndView setMemberDelete(HttpSession session)throws Exception{
 		ModelAndView mv = new ModelAndView();
@@ -74,8 +75,6 @@ public class MemberUserController {
 		
 		return mv;
 	}
-	
-	
 	
 	@PostMapping("memberUpdate")
 	public ModelAndView setMemberUpdate(MemberDTO memberDTO, HttpSession session)throws Exception{
@@ -112,8 +111,6 @@ public class MemberUserController {
 		return mv;
 	}
 	
-
-	
 	@GetMapping("memberLogout")
 	public ModelAndView getMemberLogout(HttpSession session)throws Exception{
 		//웹브라우저 종료
@@ -136,8 +133,24 @@ public class MemberUserController {
 	}
 	
 	@PostMapping("memberLogin")
-	public ModelAndView getMemberLogin(MemberDTO memberDTO, HttpSession session)throws Exception{
+	public ModelAndView getMemberLogin(MemberDTO memberDTO, String remember ,HttpSession session, HttpServletResponse response)throws Exception{
 		ModelAndView mv = new ModelAndView();
+		System.out.println("Remeber : " + remember);
+		//remember의 값이 null이 아니라면 cookie발행
+		// cookie의 이름은 remember, value는 로그인 시 id
+		if(remember!=null) {
+			Cookie cookie = new Cookie("remember", memberDTO.getId());
+			cookie.setDomain("/member/memberLogin");
+			response.addCookie(cookie);
+		}else {
+			Cookie cookie = new Cookie("remember", "");
+			cookie.setDomain("/member/memberLogin");
+			cookie.setMaxAge(0);
+			response.addCookie(cookie);
+		}
+		
+		System.out.println(memberDTO.getId());
+		System.out.println(memberDTO.getPw());
 		memberDTO = memberUserService.getMemberLogin(memberDTO);
 		
 		if(memberDTO != null) {

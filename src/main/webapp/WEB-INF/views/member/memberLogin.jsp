@@ -17,14 +17,14 @@
 	 <form action="./memberLogin" method="post">
     <div class="form-group">
       <label for="id">Id:</label>
-      <input type="text" class="form-control" id="id" placeholder="Enter id" name="id">
+      <input type="text" value="${cookie.remember.value}" class="form-control" id="id" placeholder="Enter id" name="id">
     </div>
     <div class="form-group">
       <label for="pw">Password:</label>
       <input type="password" class="form-control" id="pw" placeholder="Enter password" name="pw">
     </div>
     <div class="checkbox">
-      <label><input type="checkbox" name="remember"> Remember me</label>
+      <label><input type="checkbox" name="remember" value="check"> Remember me</label>
     </div>
     <button type="submit" class="btn btn-default">Login</button>
   </form>

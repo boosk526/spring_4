@@ -22,6 +22,8 @@
   	</c:if>
   	<img alt="main Image" src="./resources/images/index/main.jpg">
   </div>
+  
+  <a href="./cookie/makeCookie">MakeCookie</a>
 </div>
 
 </body>
