@@ -9,7 +9,7 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 @Component
 public class QnaMemberInterceptor extends HandlerInterceptorAdapter{
-
+	
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
@@ -20,14 +20,14 @@ public class QnaMemberInterceptor extends HandlerInterceptorAdapter{
 		Object obj = session.getAttribute("member");
 		
 		boolean check = false;
-		
+		 
 		if(obj != null) {
 			check = true;
 		}else {
 			response.sendRedirect("../member/memberLogin");
 		}
+		
 		return check;
 	}
-	
-	
+
 }
