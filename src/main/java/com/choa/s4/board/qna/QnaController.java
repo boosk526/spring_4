@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -145,9 +146,11 @@ public class QnaController {
 		ModelAndView mv = new ModelAndView();
 		List<BoardDTO> ar = qnaService.getList(pager);
 		
+		ar=null;
 		BoardDTO boardDTO  = ar.get(0);
 		QnaDTO qnaDTO = (QnaDTO)boardDTO;
 		System.out.println(qnaDTO.getDepth());
+		
 		mv.addObject("board", "qna");
 		mv.addObject("list", ar);
 		mv.addObject("pager", pager);
@@ -155,4 +158,6 @@ public class QnaController {
 		return mv;
 	}
 
+	
+	
 }
