@@ -146,7 +146,7 @@ public class MemberUserController {
 			Cookie cookie = new Cookie("remember", "");
 			cookie.setDomain("/member/memberLogin");
 			cookie.setMaxAge(0);
-			response.addCookie(cookie);
+			//response.addCookie(cookie);
 		}
 		
 		System.out.println(memberDTO.getId());
