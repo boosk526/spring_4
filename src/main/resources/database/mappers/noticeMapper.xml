@@ -38,7 +38,7 @@
 		select N.*, NF.*
 		from notice N left join noticeFile NF
 		on N.num = NF.num
-		where N.num='a'
+		where N.num=#{num}
 	</select>
 	
 	<select id="getNum" resultType="Long">
