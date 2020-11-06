@@ -6,6 +6,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -23,6 +24,8 @@ public class NoticeService implements BoardService {
 	private NoticeDAO noticeDAO;
 	@Autowired
 	private FileSaver fileSaver;
+	@Value("#{fileSave['notice']}")
+	private String filePath;
 
 
 	public boolean summernoteDelete(String file, HttpSession session)throws Exception{
@@ -49,7 +52,7 @@ public class NoticeService implements BoardService {
 	public int setInsert(BoardDTO boardDTO, MultipartFile[] files, HttpSession session) throws Exception {
 		
 		//파일을 HDD에 저장 /resources/upload/notice
-		String path = session.getServletContext().getRealPath("/resources/upload/notice");
+		String path = session.getServletContext().getRealPath(filePath);
 		File file = new File(path);
 		System.out.println(path);
 		//---- Sequence

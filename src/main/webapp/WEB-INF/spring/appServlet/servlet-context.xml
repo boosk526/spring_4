@@ -55,6 +55,8 @@
 		</interceptor>
 	</interceptors>
 	
+	<beans:import resource="classpath:config/*-context.xml"/>
+	
 	<context:component-scan base-package="com.choa.s4" />
 	
 	<tx:annotation-driven proxy-target-class="true"/>
